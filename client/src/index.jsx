@@ -10,7 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genres: []
+      genres: [],
+      favorites: []
     }    
   }
 
@@ -31,6 +32,7 @@ class App extends React.Component {
         if (err) {console.log('error in getting genres to client: ', err)}
       }) 
   }
+  
 
   render() {    
     return (
