@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/swp');
 
+// create a schema to hold the songs that the user saves
+let favoritesSchema = mongoose.Schema({
+  albumTitle: String,
+  artist: String,
+  spotifyUrl: String,
+  
+
+})
+
+let Favorite = mongoose.model('Favorite', favoritesSchema);
+
 
 // create a schema to hold the list of genres in a database, so you don't need to call Spotify API every time
 // let genreSchema = mongoose.Schema({  
