@@ -21,7 +21,7 @@ class App extends React.Component {
     axios.get('/genres')
       .then( (results) => {
         let genres = results.data.genres
-        console.log('got genres to front end: ', genres)
+        console.log('IF UNDEFINED, REFRESH TOKEN!! | got genres to front end: ', genres)
         this.setState({
           genres: genres
         })

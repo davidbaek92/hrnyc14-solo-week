@@ -29,7 +29,7 @@ const getGenres = (cb) => {
   } 
 
   request(options, (err, data, body) => {
-    if (err) {console.log('ERROR IN API REQUEST: ', err)}
+    if (err) {console.log('ERROR IN API GENRES REQUEST: ', err)}
     else {            
       cb(err, data, body);
     }
@@ -37,14 +37,21 @@ const getGenres = (cb) => {
 }
 
 // Makes a GET request to Spotify to return the songs that match the genre that was entered
-const getSongs = ({genre}) => {
+const getSongs = ({genre}, cb) => {
   console.log('DB | getting songs with this genre: ', genre)
   let options = {
-    url: 'https://api.spotify.com/v1/recommendations',
+    url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}`,
     headers: {
       Authorization: token
     }
   }
+
+  request(options, (err, data, body) => {
+    if (err) {console.log('ERROR IN API SONGS REQUEST: ', err)}
+    else {
+      cb(err, data, body);
+    }
+  })
 }
 
 

@@ -21,10 +21,11 @@ app.get('/genres', (req, res) => {
   // Call a helper function that will send the actual GET request to Spotify's API for the genres
   getGenres( (err, data, body) => {
     if (err) {
-      console.log('Error in GET/genres: ', genres);
+      console.log('Error in GET/genres: ', err);
+    } else {
+      let genres = body;    
+      res.send(genres);
     }
-    let genres = body;    
-    res.send(genres);
   })
 })
 
@@ -32,8 +33,16 @@ app.get('/genres', (req, res) => {
 app.get('/songs', (req, res) => {
   let genre = req.query
   console.log('server | getting songs with this genre: ', genre);
-  getSongs(genre)
-  res.send('Got songs')
+  getSongs(genre, (err, data, body) => {
+    if (err) {
+      console.log('Error in GET/songs: ', err)
+    } else {
+      let songs = body
+      console.log('Spotify returned these songs: ', songs)
+      res.send(songs)
+    }
+  })
+
 })
 
 let port = 3000
