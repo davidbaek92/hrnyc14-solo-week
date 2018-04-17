@@ -8,7 +8,8 @@ class Search extends React.Component{
     super(props)
     this.state = {
       genre: 'pop',
-      songs: []
+      songs: [],
+      favorites: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,6 +17,7 @@ class Search extends React.Component{
 
   // return an initial list of songs when page loads
   componentDidMount() {
+    console.log('in Search component. getting songs on mount')
     axios.get('/songs', {
       params: {
         genre: this.state.genre
@@ -55,6 +57,12 @@ class Search extends React.Component{
       })
   }
 
+  getFavorites() {
+    if (this.props.showingFaves === true) {
+      console.log('Showing faves is: ', this.props.showingFaves);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -65,8 +73,7 @@ class Search extends React.Component{
           />
           <input type="submit" value="Submit" onClick={this.handleSubmit}/>
         </form>
-        <Playlist songs={this.state.songs} />
-
+        <Playlist songs={this.props.showingFaves === false ? this.state.songs : this.state.favorites}/>
       </div>
 
     )

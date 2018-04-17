@@ -3,9 +3,10 @@ import axios from 'axios';
 
 class Playlist extends React.Component {
   constructor(props) {
+    console.log('props in Playlist component are: ', props);
     super(props)
     this.state = {
-
+      favorites: []      
     }
     this.saveSong = this.saveSong.bind(this);
   }
