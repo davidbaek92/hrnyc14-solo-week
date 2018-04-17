@@ -21,8 +21,7 @@ const token = require('./../config').TOKEN;
 
 // Create a fuction that will make a GET request to Spotify and return the genres
 const getGenres = (cb) => {
-  let options = {    
-    method: 'GET',
+  let options = {        
     url: 'https://api.spotify.com/v1/recommendations/available-genre-seeds',
     headers: {
       Authorization: token
@@ -31,12 +30,21 @@ const getGenres = (cb) => {
 
   request(options, (err, data, body) => {
     if (err) {console.log('ERROR IN API REQUEST: ', err)}
-    else {      
-      console.log('body: ', body);      
+    else {            
       cb(err, data, body);
     }
   })
+}
 
+// Makes a GET request to Spotify to return the songs that match the genre that was entered
+const getSongs = ({genre}) => {
+  console.log('DB | getting songs with this genre: ', genre)
+  let options = {
+    url: 'https://api.spotify.com/v1/recommendations',
+    headers: {
+      Authorization: token
+    }
+  }
 }
 
 
@@ -44,3 +52,4 @@ const getGenres = (cb) => {
 
 // After MVP, save the genres in a database for quicker calling upon page rendering?
 exports.getGenres = getGenres;
+exports.getSongs = getSongs;
