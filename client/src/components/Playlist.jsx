@@ -8,8 +8,7 @@ const Playlist = (props) => {
         return (
           <div key={song.id}>
             <div>
-              <div>{song.name}</div>
-              <div><i>{song.external_urls.spotify}</i></div>
+              <a href={song.external_urls.spotify}>{song.name}</a>              
               <p></p>
             </div>            
           </div>
