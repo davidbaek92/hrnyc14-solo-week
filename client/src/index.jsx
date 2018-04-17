@@ -35,11 +35,10 @@ class App extends React.Component {
       }) 
   }
 
+  // toggle state of showing faves on click
   toggleShowFaves() {
     this.setState({
       showingFaves: !this.state.showingFaves
-    }, () => {
-      console.log('Showing favorites: ', this.state.showingFaves);
     })
   }
 
