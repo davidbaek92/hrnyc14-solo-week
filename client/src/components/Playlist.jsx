@@ -7,9 +7,11 @@ const Playlist = (props) => {
       {props.songs.map( (song) => {
         return (
           <div key={song.id}>
-            <p>{song.name}
+            <div>
+              <div>{song.name}</div>
               <div><i>{song.external_urls.spotify}</i></div>
-            </p>            
+              <p></p>
+            </div>            
           </div>
           )
       })}
