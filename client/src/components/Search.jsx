@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
+import Playlist from './Playlist.jsx'
+
 class Search extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-      genre: ''
+      genre: '',
+      songs: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,19 +32,27 @@ class Search extends React.Component{
       }
     })
       .then( (response) => {
-        console.log('Got songs!: ', response)
+        let songs = response.data.tracks
+        console.log('Got songs!: ', songs)
+        this.setState({
+          songs: songs
+        })
       })
   }
 
   render() {
     return (
-      <form>
-        <input 
-        onChange={this.handleChange}
-        value={this.state.genre}
-        />
-        <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-      </form>
+      <div>
+        <form>
+          <input 
+          onChange={this.handleChange}
+          value={this.state.genre}
+          />
+          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+        </form>
+        <Playlist songs={this.state.songs} />
+
+      </div>
 
     )
   }
