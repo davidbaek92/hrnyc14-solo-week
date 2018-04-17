@@ -12,6 +12,23 @@ let favoritesSchema = mongoose.Schema({
 
 let Favorite = mongoose.model('Favorite', favoritesSchema);
 
+// Add song to the database
+const saveSongs = (song) => {
+  let saved = {
+    songId: song.id,
+    albumTitle: song.album.name,
+    artist: song.artists[0].name,
+    spotifyUrl: song.external_urls.spotify,
+    albumArt: song.album.images[1].url
+  }
+  console.log('inside DB. saving song: ', saved);
+  return Favorite.create(saved)
+    .catch( (err) => {
+      console.log('ERROR in saving song to database!: ', err);
+    })
+}
+
+exports.saveSongs = saveSongs;
 
 // create a schema to hold the list of genres in a database, so you don't need to call Spotify API every time
 // let genreSchema = mongoose.Schema({  

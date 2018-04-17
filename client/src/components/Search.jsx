@@ -7,11 +7,26 @@ class Search extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-      genre: '',
+      genre: 'pop',
       songs: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // return an initial list of songs when page loads
+  componentDidMount() {
+    axios.get('/songs', {
+      params: {
+        genre: this.state.genre
+      }
+    })
+      .then( (response) => {
+        let songs = response.data.tracks;
+        this.setState({
+          songs: songs
+        })
+      })
   }
 
   handleChange(event) {

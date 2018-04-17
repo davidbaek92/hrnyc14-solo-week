@@ -54,9 +54,6 @@ const getSongs = ({genre}, cb) => {
   })
 }
 
-
-
-
 // After MVP, save the genres in a database for quicker calling upon page rendering?
 exports.getGenres = getGenres;
 exports.getSongs = getSongs;

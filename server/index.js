@@ -16,6 +16,9 @@ const getGenres = require('./helpers').getGenres
 // Helper function to get songs from Spotify's API
 const getSongs = require('./helpers').getSongs
 
+// Helper function to save songs in database
+const saveSongs = require('./../database/index.js').saveSongs
+
 // GET request to get all genres in Spotify
 app.get('/genres', (req, res) => {
   // Call a helper function that will send the actual GET request to Spotify's API for the genres
@@ -42,7 +45,16 @@ app.get('/songs', (req, res) => {
       res.send(songs)
     }
   })
+})
 
+app.post('/save', (req, res) => {
+  let song = req.body;
+  console.log('inside server. saving this song: ', song)
+  saveSongs(song)
+    .then( (response) => {      
+      console.log('inside server. back from database with this song saved: ', response)
+      res.send(response);
+    })
 })
 
 let port = 3000

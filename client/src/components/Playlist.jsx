@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Playlist extends React.Component {
   constructor(props) {
@@ -11,6 +12,11 @@ class Playlist extends React.Component {
 
   saveSong(song) {    
     console.log('Saving this song: ', song);
+    axios.post('/save', song)
+      .then( (response) => {
+        let song = response.data
+        console.log('Song was saved: ', song)
+      })
   }
 
   render() {
