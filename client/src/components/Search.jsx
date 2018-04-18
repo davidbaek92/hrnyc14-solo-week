@@ -16,20 +16,20 @@ class Search extends React.Component{
   }
 
   // return an initial list of songs when page loads
-  componentDidMount() {
-    console.log('in Search component. getting songs on mount')
-    axios.get('/songs', {
-      params: {
-        genre: this.state.genre
-      }
-    })
-      .then( (response) => {
-        let songs = response.data.tracks;
-        this.setState({
-          songs: songs
-        })
-      })
-  }
+  // componentDidMount() {
+  //   console.log('in Search component. getting songs on mount')
+  //   axios.get('/songs', {
+  //     params: {
+  //       genre: this.state.genre
+  //     }
+  //   })
+  //     .then( (response) => {
+  //       let songs = response.data.tracks;
+  //       this.setState({
+  //         songs: songs
+  //       })
+  //     })
+  // }
 
   handleChange(event) {
     let genre = event.target.value;    

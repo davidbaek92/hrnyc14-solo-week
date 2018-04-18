@@ -1,57 +1,77 @@
-// Create helper funcions that will be called by the server
 const axios = require('axios');
 const request = require('request');
 const clientId = require('./../config').clientId;
 const clientSecret = require('./../config').clientSecret;
-const token = require('./../config').TOKEN;
+// const token = require('./../config').TOKEN;
 
-// const spotify = require('machinepack-spotify')
-// const refresh = require('spotify-refresh');
-
-// Get a new Spotify access token when the old one expires
-// refresh(token, clientId, clientSecret, (err, res, body) => {
-//   if (err) {console.log('ERROR in refreshing Spotify access token!', err)}
-//   else {
-//     let response = body;
-//     console.log('response: ', response)
-//   }
-// })
-
-// POST request to get refreshed access token from Spotify
+// ====================================
+// IMPORTANT
+// ====================================
+// Use the clientId and clientSeceret to access a token
+// Pass in that token, instead of generating the token and updating config file
+// ====================================
 
 // Create a fuction that will make a GET request to Spotify and return the genres
 const getGenres = (cb) => {
-  let options = {        
-    url: 'https://api.spotify.com/v1/recommendations/available-genre-seeds',
+  
+  // Set up authorization options
+  let authOptions = {        
+    url: 'https://accounts.spotify.com/api/token',
     headers: {
-      Authorization: token
-    }
-  } 
+        'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+      },
+    form: {
+        grant_type: 'client_credentials'
+      },
+      json: true
+    };
 
-  request(options, (err, data, body) => {
-    if (err) {console.log('ERROR IN API GENRES REQUEST: ', err)}
-    else {            
-      cb(err, data, body);
+  // Send a post request to get an access token using clientId and clientSecret      
+  request.post(authOptions, (err, data, body) => {    
+    let token = body.access_token; 
+
+    let options = {
+      url:  'https://api.spotify.com/v1/recommendations/available-genre-seeds',
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
     }
+
+    request.get(options, (err, data, body) => {         
+      cb(err, data, body);
+    })    
   })
 }
 
 // Makes a GET request to Spotify to return the songs that match the genre that was entered
-const getSongs = ({genre}, cb) => {
-  console.log('DB | getting songs with this genre: ', genre)
-  let options = {
-    url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}`,
-    headers: {
-      Authorization: token
-    }
-  }
+const getSongs = ({genre}, cb) => {  
 
-  request(options, (err, data, body) => {
-    if (err) {console.log('ERROR IN API SONGS REQUEST: ', err)}
-    else {
-      cb(err, data, body);
+  // Set up authorization options
+  let authOptions = {        
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+        'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+      },
+    form: {
+        grant_type: 'client_credentials'
+      },
+      json: true
+    };
+   
+  request.post(authOptions, (err, data, body) => {
+    let token = body.access_token;
+    
+    let options = {
+      url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}`,
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
     }
-  })
+
+    request.get(options, (err, data, body) => {
+      cb(err,data,body);
+    })
+  })  
 }
 
 // After MVP, save the genres in a database for quicker calling upon page rendering?

@@ -19,15 +19,17 @@ const getSongs = require('./helpers').getSongs
 // Helper function to save songs in database
 const saveSongs = require('./../database/index.js').saveSongs
 
+// Create a POST request to get an access token from Spotify using the clientId and clientSecret
+
 // GET request to get all genres in Spotify
 app.get('/genres', (req, res) => {
   // Call a helper function that will send the actual GET request to Spotify's API for the genres
   getGenres( (err, data, body) => {
     if (err) {
       console.log('Error in GET/genres: ', err);
-    } else {
-      let genres = body;    
-      res.send(genres);
+      res.status(404).send(err);
+    } else {      
+      res.status(200).send(body);
     }
   })
 })
@@ -39,10 +41,10 @@ app.get('/songs', (req, res) => {
   getSongs(genre, (err, data, body) => {
     if (err) {
       console.log('Error in GET/songs: ', err)
-    } else {
-      let songs = body
-      console.log('Spotify returned these songs: ', songs)
-      res.send(songs)
+      res.status(404).send(err);
+    } else {      
+      console.log('Spotify returned these songs: ', body)
+      res.status(200).send(body);
     }
   })
 })
@@ -53,7 +55,7 @@ app.post('/save', (req, res) => {
   saveSongs(song)
     .then( (response) => {      
       console.log('inside server. back from database with this song saved: ', response)
-      res.send(response);
+      res.status(201).send(response);
     })
 })
 
