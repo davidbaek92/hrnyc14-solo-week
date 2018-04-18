@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import Playlist from './components/Playlist.jsx'
+import Favorites from './components/Favorites.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genre: 'pop',
+      genre: '',
       genres: [],
       songs: [],
       favorites: [],
@@ -16,10 +17,11 @@ class App extends React.Component {
     }
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.toggleFavorites = this.toggleFavorites.bind(this);
+  this.getFavorites = this.getFavorites.bind(this);
   }
 
-  componentDidMount() {    
-    this.handleSubmit();
+  componentDidMount() {        
   }
 
   getGenres() {
@@ -35,6 +37,21 @@ class App extends React.Component {
       })
   }
 
+  getFavorites() {
+    console.log('getting favorites')
+    axios.get('/save')
+      .then( (response) => {
+        let favorites = response.data;
+        console.log('Got favorites: ', favorites);
+        this.setState({
+          favorites: favorites
+        })
+      })
+      .catch( (err) => {
+
+      })
+  }
+
   // Set the genre to be searched
   handleChange(event) {    
     let genre = event.target.value;
@@ -44,7 +61,7 @@ class App extends React.Component {
   }
 
   // Get the songs that match the genre that was searched
-  handleSubmit() {
+  handleSubmit(event) {
     event.preventDefault();
     axios.get('/songs', {
       params: {
@@ -60,11 +77,22 @@ class App extends React.Component {
       })
       .catch()
   }
+
+  toggleFavorites(event) {
+    this.setState({
+      showingFaves: !this.state.showingFaves
+    }, () => {
+      console.log('showing faves: ', this.state.showingFaves);
+      if (this.state.showingFaves) {
+        this.getFavorites();
+      }
+    })
+  }
   
   render() {
     return (
       <div>
-        <button>{this.state.showingFaves === false ? 'Show Songs' : 'Show Favorites'}</button>
+        <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>
         <form>
           <input 
           onChange={this.handleChange}
@@ -72,7 +100,7 @@ class App extends React.Component {
           />
           <input type="submit" value="Submit" onClick={this.handleSubmit}/>
         </form>
-        <Playlist songs={this.state.songs}/>
+        {this.state.showingFaves ? <Favorites favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
       </div>
     )
   }

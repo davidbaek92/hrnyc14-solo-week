@@ -22,11 +22,10 @@ class Playlist extends React.Component {
     return (
     <div>
       <h3>Songs</h3>
-        {this.props.songs.map( (song) => {
-          console.log(song)
+        {this.props.songs.map( (song) => {          
           return (          
-              <div key={song.id || song.songId}>                        
-                <a href={!!song.external_urls.spotify ? song.external_urls.spotify : song.spotifyUrl}>{song.name} </a>
+              <div key={song.id }>                        
+                <a href={song.external_urls.spotify}>{song.name} </a>
                 <button type="button" onClick={() => {this.saveSong(song)} }>Save</button>                                                            
                 <p>
                   <img src={song.album.images[1].url || song.albumArt} />                      
