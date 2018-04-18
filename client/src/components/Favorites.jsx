@@ -13,7 +13,15 @@ class Favorites extends React.Component{
       <div>
         <div>Favorites</div>
         {this.props.favorites.map( (favorite) => {
-          console.log(favorite);          
+          console.log(favorite);
+          return(
+            <div key={favorite.songId}>
+              <a href={favorite.spotifyUrl}>{favorite.title}</a>
+              <p>
+                <img src={favorite.albumArt} />
+              </p>
+            </div>
+          )          
         })}        
       </div>
     )

@@ -28,7 +28,7 @@ class Playlist extends React.Component {
                 <a href={song.external_urls.spotify}>{song.name} </a>
                 <button type="button" onClick={() => {this.saveSong(song)} }>Save</button>                                                            
                 <p>
-                  <img src={song.album.images[1].url || song.albumArt} />                      
+                  <img src={song.album.images[1].url} />                      
                 </p>
                 <p></p>
               </div>                      

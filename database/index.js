@@ -4,6 +4,7 @@ mongoose.connect('mongodb://localhost/swp');
 // create a schema to hold the songs that the user saves
 let favoritesSchema = mongoose.Schema({
   songId: String,
+  songTitle: String,
   albumTitle: String,
   artist: String,
   spotifyUrl: String,
@@ -16,6 +17,7 @@ let Favorite = mongoose.model('Favorite', favoritesSchema);
 const saveSongs = (song) => {
   let saved = {
     songId: song.id,
+    songTitle: song.name,
     albumTitle: song.album.name,
     artist: song.artists[0].name,
     spotifyUrl: song.external_urls.spotify,
