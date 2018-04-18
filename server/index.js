@@ -19,7 +19,8 @@ const getSongs = require('./helpers').getSongs
 // Helper function to save songs in database
 const saveSongs = require('./../database/index.js').saveSongs
 
-// Create a POST request to get an access token from Spotify using the clientId and clientSecret
+// Helper function to get saved songs in database
+const getFavorites = require('./../database/index.js').getFavorites
 
 // GET request to get all genres in Spotify
 app.get('/genres', (req, res) => {
@@ -56,6 +57,18 @@ app.post('/save', (req, res) => {
     .then( (response) => {      
       console.log('inside server. back from database with this song saved: ', response)
       res.status(201).send(response);
+    })
+})
+
+// GET request to get favorite songs saved in the database
+app.get('/save', (req, res) => {
+  getFavorites()
+    .then( (response) => {
+      console.log('inside server. back from database with favorites: ', response)
+      res.status(201).send(response);
+    })
+    .catch( (err) => {
+      res.status(404).send(err);
     })
 })
 

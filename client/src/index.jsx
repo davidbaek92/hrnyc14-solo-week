@@ -2,51 +2,77 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import Search from './components/Search.jsx'
+import Playlist from './components/Playlist.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      genre: 'pop',
       genres: [],
-      // if showingFaves === false, clicking 'Show Favorites' will render the favorite songs from the database
+      songs: [],
+      favorites: [],
       showingFaves: false
-    }    
-  this.toggleShowFaves = this.toggleShowFaves.bind(this);
+    }
+  this.handleChange = this.handleChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // Send an intial GET request to return the genres from Spotify
-  componentDidMount() {
-    this.getGenres();
+  componentDidMount() {    
+    this.handleSubmit();
   }
 
-  // GET request to return the genres from Spotify
   getGenres() {
     axios.get('/genres')
-      .then( (results) => {
-        let genres = results.data.genres
-        console.log('IF UNDEFINED, REFRESH TOKEN!! | got genres to front end: ', genres)
+      .then( (response) => {
+        let genres = response.data.genres        
         this.setState({
           genres: genres
         })
       })
       .catch( (err) => {
-        if (err) {console.log('error in getting genres to client: ', err)}
-      }) 
+        console.log('Error in getting genres: ', err);
+      })
   }
 
-  // toggle state of showing faves on click
-  toggleShowFaves() {
+  // Set the genre to be searched
+  handleChange(event) {    
+    let genre = event.target.value;
     this.setState({
-      showingFaves: !this.state.showingFaves
+      genre: genre
     })
   }
 
-  render() {    
+  // Get the songs that match the genre that was searched
+  handleSubmit() {
+    event.preventDefault();
+    axios.get('/songs', {
+      params: {
+        genre: this.state.genre
+      }
+    })
+      .then( (response) => {
+        let songs = response.data.tracks;
+        console.log('got songs: ', songs)
+        this.setState({
+          songs: songs
+        })
+      })
+      .catch()
+  }
+  
+  render() {
     return (
       <div>
-        <button type="button" onClick={this.toggleShowFaves}>Show Favorites</button>        
-        <Search showingFaves={this.state.showingFaves}/>        
+        <button>{this.state.showingFaves === false ? 'Show Songs' : 'Show Favorites'}</button>
+        <form>
+          <input 
+          onChange={this.handleChange}
+          value={this.state.genre}
+          />
+          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+        </form>
+        <Playlist songs={this.state.songs}/>
       </div>
     )
   }

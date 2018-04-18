@@ -28,7 +28,15 @@ const saveSongs = (song) => {
     })
 }
 
+const getFavorites = () => {
+  return Favorite.find({})
+    .catch( (err) => {
+      console.log('ERROR in getting favorites!: ', err);
+    })
+}
+
 exports.saveSongs = saveSongs;
+exports.getFavorites = getFavorites;
 
 // create a schema to hold the list of genres in a database, so you don't need to call Spotify API every time
 // let genreSchema = mongoose.Schema({  
