@@ -42,7 +42,9 @@ const getFavorites = () => {
 const deleteFavorite = (song) => {
   let deleted = song;
   console.log('in database. deleting: ', deleted);
-  return Favorite.remove({})
+  return Favorite.remove({
+    songId: deleted.songId
+  })
     .catch( (err) => {
 
     })

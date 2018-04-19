@@ -20,7 +20,7 @@ const getSongs = require('./helpers').getSongs
 const saveSongs = require('./../database/index.js').saveSongs
 
 // Helper function to remove song in database
-const deleteFavorites = require('./../database/index.js').deleteFavorites
+const deleteFavorite = require('./../database/index.js').deleteFavorite
 
 // Helper function to get saved songs in database
 const getFavorites = require('./../database/index.js').getFavorites
@@ -72,9 +72,9 @@ app.get('/save', (req, res) => {
 
 // POST request to remove song from the database
 app.post('/delete', (req, res) => {
-  let deleted = req.body;
+  let deleted = req.body
   console.log('inside server. deleting this song: ', deleted);
-  deleteFavorites()
+  deleteFavorite(deleted)
     .then( (response) => {
       res.status(201).send(response);
     })

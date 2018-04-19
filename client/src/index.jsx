@@ -54,10 +54,11 @@ class App extends React.Component {
 
   deleteFavorite(favorite) {
     console.log('Deleting this favorite: ', favorite);
-    axios.post('/delete')
+    axios.post('/delete', favorite)
       .then( (response) => {
         let deleted = response;
         console.log('Deleted: ', deleted);
+        // get the new favorites
         // update state
       })
       .catch()
@@ -111,7 +112,7 @@ class App extends React.Component {
           />
           <input type="submit" value="Submit" onClick={this.handleSubmit}/>
         </form>
-        {this.state.showingFaves ? <Favorites deleteFavorites={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
+        {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
       </div>
     )
   }

@@ -17,7 +17,7 @@ class Favorites extends React.Component{
           return(
             <div key={favorite.songId}>
               <a href={favorite.spotifyUrl}>{favorite.songTitle}</a>
-              <button type="button" onClick={ () => {this.props.deleteFavorites(favorite)} }>Delete</button>
+              <button type="button" onClick={ () => {this.props.deleteFavorite(favorite)} }>Delete</button>
               <p>
                 <img src={favorite.albumArt} />
               </p>
