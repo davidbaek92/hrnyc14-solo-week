@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // Material UI
 import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -31,6 +32,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {        
+    // Get the genres when the App component mounts to populate the data source in the AutoComplete text field
+    this.getGenres()
   }
 
   getGenres() {
@@ -117,8 +120,9 @@ class App extends React.Component {
           ? <p></p>
           :
             <form className="nav">
-              <TextField 
+              <AutoComplete 
                 hintText="Enter a genre and press enter!"
+                dataSource={this.state.genres}
                 onChange={this.handleChange}
                 value={this.state.genre}
               />          
