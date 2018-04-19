@@ -17,7 +17,7 @@ class Favorites extends React.Component{
           {this.props.favorites.map( (favorite) => {          
             return(
               <div key={favorite.songId}>
-                <a href={favorite.spotifyUrl}>{favorite.songTitle}</a>
+                <a href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>
                 <button type="button" onClick={ () => {this.props.deleteFavorite(favorite)} }>Delete</button>
                 <p>
                   <img src={favorite.albumArt} />
