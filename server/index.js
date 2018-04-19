@@ -39,8 +39,8 @@ app.get('/genres', (req, res) => {
 
 // GET request to get songs that match the genre that was typed in
 app.get('/songs', (req, res) => {
-  let genre = req.query  
-  getSongs(genre, (err, data, body) => {
+  let genre = req.query    
+  getSongs(genre, (err, data, body) => {    
     if (err) {
       console.log('Error in GET/songs: ', err)
       res.status(404).send(err);

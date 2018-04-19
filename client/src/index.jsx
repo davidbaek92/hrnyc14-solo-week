@@ -31,9 +31,8 @@ class App extends React.Component {
   this.deleteFavorite = this.deleteFavorite.bind(this);
   }
 
-  componentDidMount() {        
-    // Get the genres when the App component mounts to populate the data source in the AutoComplete text field
-    this.getGenres()
+  componentDidMount() {     
+    this.getGenres();   
   }
 
   getGenres() {
@@ -120,9 +119,8 @@ class App extends React.Component {
           ? <p></p>
           :
             <form className="nav">
-              <AutoComplete 
+              <TextField 
                 hintText="Enter a genre and press enter!"
-                dataSource={this.state.genres}
                 onChange={this.handleChange}
                 value={this.state.genre}
               />          

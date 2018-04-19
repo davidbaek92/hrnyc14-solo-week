@@ -21,6 +21,10 @@ h1 {
   text-align: center;  
 }
 
+h3 {
+  font-family: 'Roboto';
+}
+
 .nav {
   vertical-align: middle;
   align-content: center;
@@ -28,6 +32,10 @@ h1 {
 
 .hide {
   display: none;
+}
+
+.error {
+  font-family: 'Roboto';
 }
 
 a {
