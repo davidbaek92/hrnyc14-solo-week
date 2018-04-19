@@ -1,7 +1,15 @@
+// Dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+// Material UI
+import TextField from 'material-ui/TextField';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+
+// Components
 import Playlist from './components/Playlist.jsx'
 import Favorites from './components/Favorites.jsx'
 
@@ -102,22 +110,25 @@ class App extends React.Component {
   }
   
   render() {
-    return (
-      <div>
-        {this.state.showingFaves 
-        ? <p><p></p></p>
-        :
-          <form>
-            <input 
-            onChange={this.handleChange}
-            value={this.state.genre}
-            />          
-            <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-          </form>
-        }
-        <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>
-        {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
-      </div>
+    return (      
+      <MuiThemeProvider>
+        <div id="main">
+          {this.state.showingFaves 
+          ? <p></p>
+          :
+            <form className="nav">
+              <TextField 
+                hintText="Enter a genre and press enter!"
+                onChange={this.handleChange}
+                value={this.state.genre}
+              />          
+              <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/>
+            </form>
+          }
+          <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>
+          {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
+        </div>     
+      </MuiThemeProvider> 
     )
   }
 }

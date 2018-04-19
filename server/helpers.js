@@ -1,12 +1,26 @@
 const axios = require('axios');
 const request = require('request');
-const clientId = require('./../config').clientId;
-const clientSecret = require('./../config').clientSecret;
+// const clientId = require('./../config').clientId;
+// const clientSecret = require('./../config').clientSecret;
+
+let clientId
+try {
+  clientId = require('./../config').clientId;
+} catch(err) {
+  clientId = process.env.CLIENT_ID
+}
+
+let clientSecret
+try {
+  clientSecret = require('./../config').clientSecret;
+} catch(err) {
+  clientSecret = process.env.CLIENT_SECRET
+}
 
 // ====================================
 // IMPORTANT
 // ====================================
-// Use the clientId and clientSeceret to access a token
+// Use the clientId and clientSecret to access a token
 // Pass in that token, instead of generating the token and updating config file
 // ====================================
 

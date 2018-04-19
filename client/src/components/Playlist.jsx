@@ -28,15 +28,21 @@ class Playlist extends React.Component {
         'Please try a different search'
         :
           this.props.songs.map( (song) => {          
-          return (          
-              <div key={song.id }>                        
-                <a href={song.external_urls.spotify} target="_blank">{song.name} </a>
-                <button type="button" onClick={() => {this.saveSong(song)} }>Save</button>                                                            
-                <p>
-                  <img src={song.album.images[1].url} />                      
-                </p>
-                <p></p>
+          return (
+            <div className="container">
+              <div className="song-container">
+                <div key={song.id }>                        
+                  <a href={song.external_urls.spotify} target="_blank">{song.name} </a>
+                  <p className="button">
+                    <button className="save" type="button" onClick={() => {this.saveSong(song)} }>Save</button>                                                            
+                  </p>
+                </div>          
               </div>                      
+                  <p>
+                    <img src={song.album.images[1].url} />                      
+                  </p>
+                  <p></p>
+            </div>
             )
         })}
         </div>

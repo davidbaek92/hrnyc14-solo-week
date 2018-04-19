@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/swp');
+mongoose.connect(process.env.MLAB_URL || 'mongodb://localhost/swp');
 
 // create a schema to hold the songs that the user saves
 let favoritesSchema = mongoose.Schema({
