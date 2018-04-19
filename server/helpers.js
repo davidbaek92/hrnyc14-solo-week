@@ -2,7 +2,6 @@ const axios = require('axios');
 const request = require('request');
 const clientId = require('./../config').clientId;
 const clientSecret = require('./../config').clientSecret;
-// const token = require('./../config').TOKEN;
 
 // ====================================
 // IMPORTANT
@@ -74,6 +73,5 @@ const getSongs = ({genre}, cb) => {
   })  
 }
 
-// After MVP, save the genres in a database for quicker calling upon page rendering?
 exports.getGenres = getGenres;
 exports.getSongs = getSongs;

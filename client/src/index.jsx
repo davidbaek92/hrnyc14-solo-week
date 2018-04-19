@@ -19,6 +19,7 @@ class App extends React.Component {
   this.handleSubmit = this.handleSubmit.bind(this);
   this.toggleFavorites = this.toggleFavorites.bind(this);
   this.getFavorites = this.getFavorites.bind(this);
+  this.deleteFavorite = this.deleteFavorite.bind(this);
   }
 
   componentDidMount() {        
@@ -48,8 +49,18 @@ class App extends React.Component {
         })
       })
       .catch( (err) => {
-
       })
+  }
+
+  deleteFavorite(favorite) {
+    console.log('Deleting this favorite: ', favorite);
+    axios.post('/delete')
+      .then( (response) => {
+        let deleted = response;
+        console.log('Deleted: ', deleted);
+        // update state
+      })
+      .catch()
   }
 
   // Set the genre to be searched
@@ -100,7 +111,7 @@ class App extends React.Component {
           />
           <input type="submit" value="Submit" onClick={this.handleSubmit}/>
         </form>
-        {this.state.showingFaves ? <Favorites favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
+        {this.state.showingFaves ? <Favorites deleteFavorites={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
       </div>
     )
   }

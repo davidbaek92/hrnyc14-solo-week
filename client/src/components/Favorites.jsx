@@ -2,6 +2,7 @@ import React from 'react';
 
 class Favorites extends React.Component{
   constructor(props) {
+    console.log('props in Favorites: ', props)
     super(props)
     this.state = {
 
@@ -11,12 +12,12 @@ class Favorites extends React.Component{
   render() {
     return(
       <div>
-        <div>Favorites</div>
-        {this.props.favorites.map( (favorite) => {
-          console.log(favorite);
+        <h3>Favorites</h3>
+        {this.props.favorites.map( (favorite) => {          
           return(
             <div key={favorite.songId}>
-              <a href={favorite.spotifyUrl}>{favorite.title}</a>
+              <a href={favorite.spotifyUrl}>{favorite.songTitle}</a>
+              <button type="button" onClick={ () => {this.props.deleteFavorites(favorite)} }>Delete</button>
               <p>
                 <img src={favorite.albumArt} />
               </p>

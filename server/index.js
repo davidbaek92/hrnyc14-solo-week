@@ -19,6 +19,9 @@ const getSongs = require('./helpers').getSongs
 // Helper function to save songs in database
 const saveSongs = require('./../database/index.js').saveSongs
 
+// Helper function to remove song in database
+const deleteFavorites = require('./../database/index.js').deleteFavorites
+
 // Helper function to get saved songs in database
 const getFavorites = require('./../database/index.js').getFavorites
 
@@ -37,25 +40,21 @@ app.get('/genres', (req, res) => {
 
 // GET request to get songs that match the genre that was typed in
 app.get('/songs', (req, res) => {
-  let genre = req.query
-  console.log('server | getting songs with this genre: ', genre);
+  let genre = req.query  
   getSongs(genre, (err, data, body) => {
     if (err) {
       console.log('Error in GET/songs: ', err)
       res.status(404).send(err);
-    } else {      
-      console.log('Spotify returned these songs: ', body)
+    } else {            
       res.status(200).send(body);
     }
   })
 })
 
 app.post('/save', (req, res) => {
-  let song = req.body;
-  console.log('inside server. saving this song: ', song)
+  let song = req.body;  
   saveSongs(song)
-    .then( (response) => {      
-      console.log('inside server. back from database with this song saved: ', response)
+    .then( (response) => {            
       res.status(201).send(response);
     })
 })
@@ -63,8 +62,20 @@ app.post('/save', (req, res) => {
 // GET request to get favorite songs saved in the database
 app.get('/save', (req, res) => {
   getFavorites()
+    .then( (response) => {      
+      res.status(201).send(response);
+    })
+    .catch( (err) => {
+      res.status(404).send(err);
+    })
+})
+
+// POST request to remove song from the database
+app.post('/delete', (req, res) => {
+  let deleted = req.body;
+  console.log('inside server. deleting this song: ', deleted);
+  deleteFavorites()
     .then( (response) => {
-      console.log('inside server. back from database with favorites: ', response)
       res.status(201).send(response);
     })
     .catch( (err) => {
