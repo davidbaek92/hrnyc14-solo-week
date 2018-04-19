@@ -22,7 +22,12 @@ class Playlist extends React.Component {
     return (
     <div>
       <h3>Songs</h3>
-        {this.props.songs.map( (song) => {          
+        <div className="results">
+          
+        {this.props.songs.length === 0 ?
+        'Please try a different search'
+        :
+          this.props.songs.map( (song) => {          
           return (          
               <div key={song.id }>                        
                 <a href={song.external_urls.spotify}>{song.name} </a>
@@ -34,6 +39,7 @@ class Playlist extends React.Component {
               </div>                      
             )
         })}
+        </div>
       </div>
     )
   }  

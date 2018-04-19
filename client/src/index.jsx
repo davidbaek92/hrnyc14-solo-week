@@ -104,14 +104,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {this.state.showingFaves 
+        ? <p><p></p></p>
+        :
+          <form>
+            <input 
+            onChange={this.handleChange}
+            value={this.state.genre}
+            />          
+            <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          </form>
+        }
         <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>
-        <form>
-          <input 
-          onChange={this.handleChange}
-          value={this.state.genre}
-          />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
-        </form>
         {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
       </div>
     )
