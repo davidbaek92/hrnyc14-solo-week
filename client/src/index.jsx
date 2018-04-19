@@ -59,7 +59,7 @@ class App extends React.Component {
         let deleted = response;
         console.log('Deleted: ', deleted);
         // get the new favorites
-        // update state
+        this.getFavorites();        
       })
       .catch()
   }
