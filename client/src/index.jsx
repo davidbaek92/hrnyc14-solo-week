@@ -9,6 +9,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import Paper from 'material-ui/Paper';
 
 // Components
 import Playlist from './components/Playlist.jsx'
@@ -22,6 +23,8 @@ class App extends React.Component {
       genres: [],
       songs: [],
       favorites: [],
+      category: '',
+      categories: [],
       showingFaves: false
     }
   this.handleChange = this.handleChange.bind(this);
@@ -29,10 +32,12 @@ class App extends React.Component {
   this.toggleFavorites = this.toggleFavorites.bind(this);
   this.getFavorites = this.getFavorites.bind(this);
   this.deleteFavorite = this.deleteFavorite.bind(this);
+  this.handleGenreAutoCompleteSelection = this.handleGenreAutoCompleteSelection.bind(this);
   }
 
   componentDidMount() {     
-    this.getGenres();   
+    this.getGenres();  
+    this.getCategories(); 
   }
 
   getGenres() {
@@ -59,6 +64,15 @@ class App extends React.Component {
         })
       })
       .catch( (err) => {
+      })
+  }
+
+  getCategories() {
+    console.log('getting Spotify categories');
+    axios.get('/categories')
+      .then( (response) => {
+        let categories = response.data.categories.items;
+        console.log('got categories: ', categories);
       })
   }
 
@@ -99,6 +113,27 @@ class App extends React.Component {
       .catch()
   }
 
+  // Get the songs when a genre is selected from the AutoComplete list
+  handleGenreAutoCompleteSelection() {
+    axios.get('/songs', {
+      params: {
+        genre: this.state.genre
+      }
+    })
+      .then( (response) => {
+        let songs = response.data.tracks;
+        console.log('got songs: ', songs)
+        this.setState({
+          songs: songs
+        })
+      })
+      .catch()
+  }
+
+  handleCategoryAutoCompleteSelection() {
+    
+  }
+
   toggleFavorites(event) {
     this.setState({
       showingFaves: !this.state.showingFaves
@@ -116,19 +151,31 @@ class App extends React.Component {
         <div id="main">
           {this.state.showingFaves 
           ? <p></p>
-          :
-            <form className="nav">
-              <AutoComplete 
-                hintText="Enter a genre and press enter!"
-                dataSource={this.state.genres}
-                onUpdateInput={this.handleChange}
-                value={this.state.genre}
-              />          
-              <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/>
-            </form>
+          : <div>
+              <form className="nav">
+                <AutoComplete 
+                  hintText="Enter a genre and press enter!"
+                  dataSource={this.state.genres}
+                  onUpdateInput={this.handleChange}
+                  value={this.state.genre}
+                  onNewRequest={this.handleGenreAutoCompleteSelection}
+                />          
+                {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
+              </form>
+              <form className="nav">
+                <AutoComplete 
+                  hintText="Or if you're feeling lazy, enter a mood!"
+                  dataSource={this.state.categories}
+                  onUpdateInput={this.handleChange}
+                  value={this.state.category}
+                  onNewRequest={this.handleGenreAutoCompleteSelection}
+                />          
+                {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
+              </form>
+          </div>
           }
-          <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>
-          {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                 
+          <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>          
+            {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                           
         </div>     
       </MuiThemeProvider> 
     )

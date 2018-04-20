@@ -6,15 +6,11 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-body {
-  background-color: #ECEFF1;
-}
-
 h1 {
   font-size: 4em;
   font-family: 'Roboto';
   color: #FAFAFA;
-  background-color: #0288D1;  
+  background-color: #607D8B;  
   padding: 10px;
   margin: 0;
   margin-bottom: 25px;

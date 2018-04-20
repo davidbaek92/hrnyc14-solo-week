@@ -87,5 +87,37 @@ const getSongs = ({genre}, cb) => {
   })  
 }
 
+const getCategories = (cb) => {
+  console.log('called getCategories in database')
+  let authOptions = {        
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+        'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+      },
+    form: {
+        grant_type: 'client_credentials'
+      },
+      json: true
+    };
+
+  request.post(authOptions, (err, data, body) => {
+    let token = body.access_token;
+
+    let options = {
+      url: `https://api.spotify.com/v1/browse/categories`,
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+
+    request.get(options, (err, data, body) => {
+      console.log('within helper function')      
+      console.log('body: ', body)
+      cb(err, data, body)
+    })
+  })
+}
+
 exports.getGenres = getGenres;
 exports.getSongs = getSongs;
+exports.getCategories = getCategories;

@@ -15,6 +15,9 @@ const getGenres = require('./helpers').getGenres
 // Helper function to get songs from Spotify's API
 const getSongs = require('./helpers').getSongs
 
+// Helper function to get categories from Spotify API
+const getCategories = require('./helpers').getCategories
+
 // Helper function to save songs in database
 const saveSongs = require('./../database/index.js').saveSongs
 
@@ -23,6 +26,9 @@ const deleteFavorite = require('./../database/index.js').deleteFavorite
 
 // Helper function to get saved songs in database
 const getFavorites = require('./../database/index.js').getFavorites
+
+
+
 
 // GET request to get all genres in Spotify
 app.get('/genres', (req, res) => {
@@ -35,6 +41,20 @@ app.get('/genres', (req, res) => {
       res.status(200).send(body);
     }
   })
+})
+
+// GET request to get all categories in Spotify
+app.get('/categories', (req, res) => {
+  console.log('Inside GET /categories')
+  getCategories( (err, data, body) => {    
+    console.log('body: ', body)
+    if (err) {
+      console.log('Error in GET/categories')
+      res.status(404).send(err)
+    } else {
+      res.status(200).send(body);
+    }
+  });
 })
 
 // GET request to get songs that match the genre that was typed in
@@ -50,6 +70,7 @@ app.get('/songs', (req, res) => {
   })
 })
 
+// POST request to save song
 app.post('/save', (req, res) => {
   let song = req.body;  
   saveSongs(song)
@@ -81,6 +102,7 @@ app.post('/delete', (req, res) => {
       res.status(404).send(err);
     })
 })
+
 
 let port = process.env.PORT || 3000;
 

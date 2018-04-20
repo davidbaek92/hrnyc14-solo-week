@@ -16,8 +16,8 @@ class Favorites extends React.Component{
         <div className="favorites">
           {this.props.favorites.map( (favorite) => {          
             return(
-              <div className="song-container">
-                <div key={favorite.songId}>
+              <div key={favorite.songId} className="song-container">
+                <div>
                   <a href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>
                   <p className="button">
                     <button className="delete" type="button" onClick={ () => {this.props.deleteFavorite(favorite)} }>Delete</button>

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "blazy": "^1.8.2",
     "body-parser": "^1.18.2",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
