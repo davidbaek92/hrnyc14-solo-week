@@ -45,11 +45,8 @@ app.get('/genres', (req, res) => {
 
 // GET request to get all categories in Spotify
 app.get('/categories', (req, res) => {
-  console.log('Inside GET /categories')
-  getCategories( (err, data, body) => {    
-    console.log('body: ', body)
-    if (err) {
-      console.log('Error in GET/categories')
+  getCategories( (err, data, body) => {        
+    if (err) {      
       res.status(404).send(err)
     } else {
       res.status(200).send(body);
@@ -101,6 +98,11 @@ app.post('/delete', (req, res) => {
     .catch( (err) => {
       res.status(404).send(err);
     })
+})
+
+app.get('/events', (req, res) => {
+  let artist = req.body;
+  console.log('in server. gettings events for: ', artist)
 })
 
 

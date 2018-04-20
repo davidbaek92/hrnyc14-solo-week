@@ -87,8 +87,7 @@ const getSongs = ({genre}, cb) => {
   })  
 }
 
-const getCategories = (cb) => {
-  console.log('called getCategories in database')
+const getCategories = (cb) => {  
   let authOptions = {        
     url: 'https://accounts.spotify.com/api/token',
     headers: {
@@ -110,9 +109,7 @@ const getCategories = (cb) => {
       }
     }
 
-    request.get(options, (err, data, body) => {
-      console.log('within helper function')      
-      console.log('body: ', body)
+    request.get(options, (err, data, body) => {      
       cb(err, data, body)
     })
   })

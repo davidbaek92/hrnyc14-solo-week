@@ -5,6 +5,8 @@ import axios from 'axios';
 
 // Material UI
 import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import AutoComplete from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -67,12 +69,19 @@ class App extends React.Component {
       })
   }
 
-  getCategories() {
-    console.log('getting Spotify categories');
+  getCategories() {    
     axios.get('/categories')
       .then( (response) => {
-        let categories = response.data.categories.items;
-        console.log('got categories: ', categories);
+        let categories = response.data.categories.items;        
+        let categoryNames = categories.map( (category) => {
+          return category.name;
+        })        
+        this.setState({
+          categories: categoryNames
+        })
+      })
+      .catch( (err) => {
+        console.log('Error in getting categories: ', err);
       })
   }
 
@@ -161,17 +170,7 @@ class App extends React.Component {
                   onNewRequest={this.handleGenreAutoCompleteSelection}
                 />          
                 {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
-              </form>
-              <form className="nav">
-                <AutoComplete 
-                  hintText="Or if you're feeling lazy, enter a mood!"
-                  dataSource={this.state.categories}
-                  onUpdateInput={this.handleChange}
-                  value={this.state.category}
-                  onNewRequest={this.handleGenreAutoCompleteSelection}
-                />          
-                {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
-              </form>
+              </form>              
           </div>
           }
           <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>          

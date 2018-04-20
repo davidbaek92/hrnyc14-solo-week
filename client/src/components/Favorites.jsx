@@ -1,38 +1,30 @@
 import React from 'react';
+import Events from './Events.jsx';
 
-class Favorites extends React.Component{
-  constructor(props) {
-    console.log('props in Favorites: ', props)
-    super(props)
-    this.state = {
-
-    }
-  }
-
-  render() {
-    return(
-      <div>
-        <h3>Favorites</h3>
-        <div className="favorites">
-          {this.props.favorites.map( (favorite) => {          
-            return(
-              <div key={favorite.songId} className="song-container">
-                <div>
-                  <a href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>
-                  <p className="button">
-                    <button className="delete" type="button" onClick={ () => {this.props.deleteFavorite(favorite)} }>Delete</button>
-                  </p>
-              </div>
-                <p>
-                  <img src={favorite.albumArt} />
-                </p>
-              </div>
-            )          
-          })}        
-        </div>
-      </div>
-    )
-  }
-}
+ const Favorites = (props) => {
+   return(
+     <div>
+       <h3>Favorites</h3>
+       <div className="favorites">
+         {props.favorites.map( (favorite) => {          
+           return(
+             <div key={favorite.songId} className="song-container">
+               <div>
+                 <a href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>
+                 <p className="button">
+                   <button className="delete" type="button" onClick={ () => {props.deleteFavorite(favorite)} }>Delete</button>
+                   <Events artist={favorite.artist}/>
+                 </p>
+             </div>
+               <p>
+                 <img src={favorite.albumArt} />
+               </p>
+             </div>
+           )          
+         })}        
+       </div>
+     </div>
+   )
+ }   
 
 export default Favorites;
