@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // Material UI
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import AutoComplete from 'material-ui/AutoComplete';
@@ -158,11 +159,12 @@ class App extends React.Component {
     return (      
       <MuiThemeProvider>
         <div id="main">
+          <button className="navButton" onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>          
           {this.state.showingFaves 
           ? <p></p>
           : <div>
               <form className="nav">
-                <AutoComplete 
+                <AutoComplete className="search"
                   hintText="Enter a genre and press enter!"
                   dataSource={this.state.genres}
                   onUpdateInput={this.handleChange}
@@ -173,8 +175,7 @@ class App extends React.Component {
               </form>              
           </div>
           }
-          <button onClick={this.toggleFavorites}>{this.state.showingFaves === false ? 'Show Favorites' : 'Show Songs'}</button>          
-            {this.state.showingFaves ? <Favorites deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                           
+            {this.state.showingFaves ? <Favorites className="favoriteComponent" deleteFavorite={this.deleteFavorite} favorites={this.state.favorites}/> : <Playlist songs={this.state.songs}/>}                           
         </div>     
       </MuiThemeProvider> 
     )

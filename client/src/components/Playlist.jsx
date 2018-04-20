@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Paper from 'material-ui/Paper';
 
 
 class Playlist extends React.Component {
@@ -21,15 +22,15 @@ class Playlist extends React.Component {
 
   render() {
     return (
-    <div>
-      <h3>Songs</h3>      
+    <div>      
+      <h3 className="songsHeader">Songs</h3>            
         <div className="results">
         {this.props.songs.length === 0 ?
-        'Please try a different search'
+        ''
         :
           this.props.songs.map( (song) => {          
           return (
-            <div key={song.id} className="container">
+            <div key={song.id} className="container">              
               <div className="song-container">
                 <div>                        
                   <a href={song.external_urls.spotify} target="_blank">{song.name} </a>
