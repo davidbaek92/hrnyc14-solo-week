@@ -75,8 +75,7 @@ class App extends React.Component {
   }
 
   // Set the genre to be searched
-  handleChange(event) {    
-    let genre = event.target.value;
+  handleChange(genre) {    
     this.setState({
       genre: genre
     })
@@ -119,9 +118,10 @@ class App extends React.Component {
           ? <p></p>
           :
             <form className="nav">
-              <TextField 
+              <AutoComplete 
                 hintText="Enter a genre and press enter!"
-                onChange={this.handleChange}
+                dataSource={this.state.genres}
+                onUpdateInput={this.handleChange}
                 value={this.state.genre}
               />          
               <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/>
