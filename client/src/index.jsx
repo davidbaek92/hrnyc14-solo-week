@@ -30,7 +30,8 @@ class App extends React.Component {
       favorites: [],
       category: '',
       categories: [],
-      showingFaves: false
+      showingFaves: false,
+      view: 'login'
     }
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,6 +44,23 @@ class App extends React.Component {
   componentDidMount() {     
     this.getGenres();  
     this.getCategories(); 
+  }
+
+  changeView(view) {
+    this.setState({
+      view: view
+    });
+  }
+
+  renderView() {
+    const {view} = this.state;
+    
+    if (view === 'login') {
+      return <Login />
+    } else if (view === 'app') {
+      return <App />
+    }
+
   }
 
   getGenres() {

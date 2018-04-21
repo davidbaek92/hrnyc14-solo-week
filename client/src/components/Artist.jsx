@@ -8,13 +8,17 @@ class Artist extends React.Component{
     this.state = {
 
     } 
-  this.findArtist = this.findArtist.bind(this);
+  this.findTopTracks = this.findTopTracks.bind(this);
   }
   
-  findArtist(event) {    
+  findTopTracks(event) {    
     let artistId = event.target.value;
     console.log('Finding Artist for: ', artistId);
-    axios.get('/Artist')
+    axios.get('/artist', {
+      params: {
+        artistId: artistId
+      }
+    })
       .then( (response) => {
         let artist = response
         console.log('artist: ', artist)
@@ -29,7 +33,7 @@ class Artist extends React.Component{
 
   render() {
     return (
-      <button value={this.props.artistId} onClick={this.findArtist}>Find Artist</button>
+      <button value={this.props.artistId} onClick={this.findTopTracks}>Find Artist</button>
     )
   }
 }

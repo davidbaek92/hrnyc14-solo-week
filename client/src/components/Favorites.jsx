@@ -1,5 +1,5 @@
 import React from 'react';
-import Events from './Events.jsx';
+import Artist from './Artist.jsx';
 
  const Favorites = (props) => {
    return(
@@ -11,8 +11,8 @@ import Events from './Events.jsx';
              <div key={favorite.songId} className="favorites">
                <div>
                  <a href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>
-                 <p className="eventsButton">                   
-                   <Events artist={favorite.artist}/>
+                 <p className="ArtistButton">                   
+                   <Artist artist={favorite.artist} artistId={favorite.artistId}/>
                  </p>
              </div>
                <p>

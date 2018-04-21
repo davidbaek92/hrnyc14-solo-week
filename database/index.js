@@ -7,6 +7,7 @@ let favoritesSchema = mongoose.Schema({
   songTitle: String,
   albumTitle: String,
   artist: String,
+  artistId: String,
   spotifyUrl: String,
   albumArt: String
 })
@@ -20,6 +21,7 @@ const saveSongs = (song) => {
     songTitle: song.name,
     albumTitle: song.album.name,
     artist: song.artists[0].name,
+    artistId: song.artists[0].id,
     spotifyUrl: song.external_urls.spotify,
     albumArt: song.album.images[1].url
   }

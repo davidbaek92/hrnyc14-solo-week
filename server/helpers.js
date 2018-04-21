@@ -115,6 +115,35 @@ const getCategories = (cb) => {
   })
 }
 
+const getTopTracks = (artistId, cb) => {
+  let authOptions = {        
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+        'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
+      },
+    form: {
+        grant_type: 'client_credentials'
+      },
+      json: true
+    };
+
+  request.post(authOptions, (err, data, body) => {
+    let token = body.access_token;
+
+    let options = {
+      url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
+      headers: {
+        Authorization: 'Bearer ' + token
+      }      
+    }
+
+    request.get(options, (err, data, body) => {      
+      cb(err, data, body)
+    })
+  })
+}
+
 exports.getGenres = getGenres;
 exports.getSongs = getSongs;
 exports.getCategories = getCategories;
+exports.getTopTracks = getTopTracks;

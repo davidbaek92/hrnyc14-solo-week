@@ -18,6 +18,9 @@ const getSongs = require('./helpers').getSongs
 // Helper function to get categories from Spotify API
 const getCategories = require('./helpers').getCategories
 
+// Helper function to get top tracks by an artist
+const getTopTracks = require('./helpers').getTopTracks
+
 // Helper function to save songs in database
 const saveSongs = require('./../database/index.js').saveSongs
 
@@ -26,7 +29,6 @@ const deleteFavorite = require('./../database/index.js').deleteFavorite
 
 // Helper function to get saved songs in database
 const getFavorites = require('./../database/index.js').getFavorites
-
 
 
 
@@ -100,9 +102,16 @@ app.post('/delete', (req, res) => {
     })
 })
 
-app.get('/events', (req, res) => {
-  let artist = req.body;
-  console.log('in server. gettings events for: ', artist)
+// GET request to get top tracks for specific artist
+app.get('/artist', (req, res) => {
+  let artistId = req.query.artistId;  
+  getTopTracks(artistId, (err, data, body) => {    
+    if (err) {
+      res.status(404).send(err)
+    } else {
+      res.status(200).send(body);
+    }   
+  })
 })
 
 
