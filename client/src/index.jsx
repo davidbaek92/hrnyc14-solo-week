@@ -76,8 +76,7 @@ class App extends React.Component {
       })
   }
 
-  getFavorites() {
-    console.log('getting favorites')
+  getFavorites() {    
     axios.get('/save')
       .then( (response) => {
         let favorites = response.data;
@@ -106,8 +105,7 @@ class App extends React.Component {
       })
   }
 
-  deleteFavorite(favorite) {
-    console.log('Deleting this favorite: ', favorite);
+  deleteFavorite(favorite) {    
     axios.post('/delete', favorite)
       .then( (response) => {
         let deleted = response;
@@ -167,8 +165,7 @@ class App extends React.Component {
   toggleFavorites(event) {
     this.setState({
       showingFaves: !this.state.showingFaves
-    }, () => {
-      console.log('showing faves: ', this.state.showingFaves);
+    }, () => {      
       if (this.state.showingFaves) {
         this.getFavorites();
       }

@@ -1,27 +1,27 @@
 import React from 'react';
 import axios from 'axios';
+import TopTracks from './TopTracks.jsx';
 
 class Artist extends React.Component{
-  constructor(props) {
-    console.log('props in Artist componenet: ',props)
+  constructor(props) {    
     super(props)
     this.state = {
-
+      view: ''
     } 
   this.findTopTracks = this.findTopTracks.bind(this);
   }
   
   findTopTracks(event) {    
     let artistId = event.target.value;
-    console.log('Finding Artist for: ', artistId);
+    console.log('Finding toptracks for: ', artistId);
     axios.get('/artist', {
       params: {
         artistId: artistId
       }
     })
       .then( (response) => {
-        let artist = response
-        console.log('artist: ', artist)
+        console.log(response);
+        this.changeViewToTopTracks(artistId);
         })
       .catch( (err) => {
         if (err) {
@@ -29,6 +29,13 @@ class Artist extends React.Component{
         }
       })
 
+  }
+
+  changeViewToTopTracks(artistId) {
+    console.log('called changeView with artistId: ', artistId);
+    return (
+      <TopTracks artistId={artistId} />
+    )
   }
 
   render() {
