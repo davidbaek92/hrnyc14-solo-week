@@ -10,7 +10,7 @@ h1 {
   font-size: 4em;
   font-family: 'Roboto';
   color: #FAFAFA;
-  background-color: #212121;  
+  background-color: #0288d1;  
   padding: 10px;
   margin: 0;
   margin-bottom: 25px;
@@ -119,9 +119,9 @@ a:hover{
   text-transform: none;
   text-transform: capitalize;
   color: #ECEFF1;
-  background: #1197ED;  
+  background: #0288d1;  
   border-color: FAFAFA;
-  border-radius: 4px;
+  border-radius: 4px;  
   font-size: 13px;
   font-weight: 500;
   line-height: 1.3;

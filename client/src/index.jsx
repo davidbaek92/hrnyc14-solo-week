@@ -13,6 +13,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Paper from 'material-ui/Paper';
+import {orange700, orange500, blue500} from 'material-ui/styles/colors';
+
 
 // Components
 import Playlist from './components/Playlist.jsx'
@@ -170,6 +172,9 @@ class App extends React.Component {
                   onUpdateInput={this.handleChange}
                   value={this.state.genre}
                   onNewRequest={this.handleGenreAutoCompleteSelection}
+                  underlineFocusStyle={{
+                    borderColor: orange700,
+                  }}
                 />          
                 {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
               </form>              
