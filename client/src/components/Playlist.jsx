@@ -23,24 +23,25 @@ class Playlist extends React.Component {
   render() {
     return (
     <div>      
-      <h3 className="songsHeader">Songs</h3>            
+      <h3 className="songsHeader"></h3>            
         <div className="results">
         {this.props.songs.length === 0 ?
         ''
-        :
+        : 
           this.props.songs.map( (song) => {          
           return (
             <div key={song.id} className="container">              
               <div className="song-container">
                 <div>                        
-                  <a href={song.external_urls.spotify} target="_blank">{song.name} </a>
-                  <p className="button">
-                    <button className="save" type="button" onClick={() => {this.saveSong(song)} }>Save</button>                                                            
-                  </p>
+                  <a href={song.external_urls.spotify} target="_blank">{song.name} </a>                  
                 </div>          
               </div>                      
                   <p>
-                    <img className="b-lazy" src={song.album.images[1].url} />                      
+                    <img 
+                    className="b-lazy"                     
+                    src={song.album.images[1].url} 
+                    onClick={ () => {this.saveSong(song)}}
+                    />                      
                   </p>
                   <p></p>
             </div>
