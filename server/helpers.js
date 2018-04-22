@@ -75,7 +75,7 @@ const getSongs = ({genre}, cb) => {
     let token = body.access_token;
     
     let options = {
-      url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}`,
+      url: `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&limit=21`,
       headers: {
         Authorization: 'Bearer ' + token
       }
