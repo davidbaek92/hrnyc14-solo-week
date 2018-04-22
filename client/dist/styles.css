@@ -58,6 +58,8 @@ img:hover {
   font-family: 'Roboto';
 }
 
+
+
 a {
   display: "table-cell";
   font-family: 'Domine';
@@ -74,6 +76,18 @@ a:hover{
   color: #78909C;
   cursor: pointer;
 }
+
+.artistPage {
+  display: "table-cell";
+  font-size: 1em;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.songLink {
+  position: relative;
+}
+
 
 
 

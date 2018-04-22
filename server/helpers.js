@@ -131,7 +131,7 @@ const getTopTracks = (artistId, cb) => {
     let token = body.access_token;
 
     let options = {
-      url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
+      url: `https://api.spotify.com/v1/artists/${artistId}`,
       headers: {
         Authorization: 'Bearer ' + token
       }      

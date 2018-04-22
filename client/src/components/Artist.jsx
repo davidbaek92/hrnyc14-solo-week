@@ -4,15 +4,20 @@ import TopTracks from './TopTracks.jsx';
 
 class Artist extends React.Component{
   constructor(props) {    
+    // console.log('props in artist component: ', props)
     super(props)
     this.state = {
-      view: ''
-    } 
-  this.findTopTracks = this.findTopTracks.bind(this);
+      view: '',
+      artistUrl: ''
+    }   
+  this.findArtistPage = this.findArtistPage.bind(this);
   }
-  
-  findTopTracks(event) {    
-    let artistId = event.target.value;
+
+  componentDidMount() {
+    this.findArtistPage(this.props.artistId)
+  }
+
+  findArtistPage(artistId) {    
     console.log('Finding toptracks for: ', artistId);
     axios.get('/artist', {
       params: {
@@ -20,27 +25,23 @@ class Artist extends React.Component{
       }
     })
       .then( (response) => {
-        console.log(response);
-        this.changeViewToTopTracks(artistId);
+        let artistUrl = response.data.external_urls.spotify;
+        console.log('artistUrl: ', artistUrl);        
+        this.setState({
+          artistUrl: artistUrl
         })
+      })
       .catch( (err) => {
         if (err) {
           console.log('Error in finding Artist: ', err)
         }
       })
-
   }
 
-  changeViewToTopTracks(artistId) {
-    console.log('called changeView with artistId: ', artistId);
-    return (
-      <TopTracks artistId={artistId} />
-    )
-  }
 
   render() {
     return (
-      <button value={this.props.artistId} onClick={this.findTopTracks}>Find Artist</button>
+      <a className="artistPage" href={this.state.artistUrl} target="_blank">By: {this.props.artist}</a>
     )
   }
 }
