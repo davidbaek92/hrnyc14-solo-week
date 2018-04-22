@@ -135,20 +135,13 @@ a:hover{
   font-weight: 300;
   color: #424242;
   font-size: 1em;
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .songLink {
   position: relative;
 }
-
-
-
-
-/* .song-container {
-  background-color: #CFD8DC;  
-} */
 
 .container {  
   margin-bottom: 0;  
