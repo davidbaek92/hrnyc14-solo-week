@@ -172,6 +172,7 @@ a:hover{
 
 .navButton {
   font-family: 'Raleway';
+  width: 105px;
   float: left;
   position: absolute;
   left: 10px;
@@ -188,8 +189,7 @@ a:hover{
   text-decoration: none !important;
   text-transform: none;
   text-transform: capitalize;
-  color:black;
-  /* background: #0288d1;   */
+  color:black;  
   border-color: black;
   border-radius: 4px;  
   font-size: 13px;
@@ -210,4 +210,12 @@ a:hover{
 
 .nav {
   text-align: center;
+}
+
+.b-lazy {
+  opacity: 1;
+}
+
+.b-loaded {
+  opacity: 1;
 }

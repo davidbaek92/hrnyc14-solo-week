@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Paper from 'material-ui/Paper';
+import Blazy from 'blazy';
 
 
 class Playlist extends React.Component {
@@ -9,6 +10,10 @@ class Playlist extends React.Component {
     this.state = {      
     }
     this.saveSong = this.saveSong.bind(this);
+  }
+
+  componentDidMount() {    
+    const bLazy = new Blazy();
   }
 
   saveSong(song) {    
@@ -38,7 +43,7 @@ class Playlist extends React.Component {
               </div>                      
                   <div className="textWithBlurredBg">
                     <img 
-                    className="b-lazy"                     
+                    className="b-lazy"                    
                     src={song.album.images[1].url} 
                     onClick={ () => {this.saveSong(song)}}
                     />
