@@ -182,7 +182,7 @@ class App extends React.Component {
           : <div>
               <form className="nav">
                 <AutoComplete className="search"
-                  hintText="Enter a genre and press enter!"
+                  hintText="start typing and pick a genre from the list!"
                   dataSource={this.state.genres}
                   onUpdateInput={this.handleChange}
                   value={this.state.genre}

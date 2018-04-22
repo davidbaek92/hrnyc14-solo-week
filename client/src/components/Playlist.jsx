@@ -36,13 +36,14 @@ class Playlist extends React.Component {
                   <a href={song.external_urls.spotify} target="_blank">{song.name} </a>                  
                 </div>          
               </div>                      
-                  <p>
+                  <div className="textWithBlurredBg">
                     <img 
                     className="b-lazy"                     
                     src={song.album.images[1].url} 
                     onClick={ () => {this.saveSong(song)}}
-                    />                      
-                  </p>
+                    />
+                    <h2>click to save</h2>                      
+                  </div>
                   <p></p>
             </div>
             )

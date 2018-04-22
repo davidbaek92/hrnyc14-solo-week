@@ -4,7 +4,7 @@ import Artist from './Artist.jsx';
 const Favorites = (props) => {
   return(
     <div>
-      <h3>here's what you're jamming to</h3>
+      <h3>{props.favorites.length === 0 ? 'search some music and save your favorites here!' : 'here\'s what you\'re jamming to'}</h3>
       <div className="saved">
         {props.favorites.map( (favorite) => {          
           return(
@@ -13,13 +13,13 @@ const Favorites = (props) => {
                 <a className="songLink" href={favorite.spotifyUrl} target="_blank">{favorite.songTitle}</a>                            
                 <Artist artist={favorite.artist} artistId={favorite.artistId}/>                 
               </div>
-            <p>
-              <img
-                title="Click to delete" 
+            <div className="textWithBlurredBg">
+              <img                
                 src={favorite.albumArt}
                 onClick={ () => {props.deleteFavorite(favorite)}}
               />
-            </p>
+              <h2>click to remove</h2>
+            </div>
             </div>
           )          
         })}        
