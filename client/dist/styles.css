@@ -9,7 +9,7 @@
 h1 {
   font-size: 4.5em;
   font-family: 'Raleway';  
-  color: black;  
+  color: #311B92;  
   padding: 10px;
   margin: 0;
   margin-bottom: 25px;
@@ -64,7 +64,7 @@ img:hover {
 a {
   display: "table-cell";
   font-family: 'Josefin Slab';
-  font-weight: 100;
+  font-weight: bolder;
   font-size: 1.5em;
   text-align: center;
   display: block;

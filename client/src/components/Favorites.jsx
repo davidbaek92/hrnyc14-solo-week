@@ -4,7 +4,7 @@ import Artist from './Artist.jsx';
 const Favorites = (props) => {
   return(
     <div>
-      <h3>Your Saved Music</h3>
+      <h3>here's what you're jamming to</h3>
       <div className="saved">
         {props.favorites.map( (favorite) => {          
           return(
