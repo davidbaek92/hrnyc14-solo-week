@@ -13,7 +13,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Paper from 'material-ui/Paper';
-import {orange700, orange500, blue500} from 'material-ui/styles/colors';
+import {blue900, orange700, orange500, blue500} from 'material-ui/styles/colors';
 
 
 // Components
@@ -188,7 +188,7 @@ class App extends React.Component {
                   value={this.state.genre}
                   onNewRequest={this.handleGenreAutoCompleteSelection}
                   underlineFocusStyle={{
-                    borderColor: orange700,
+                    borderColor: blue900,
                   }}
                 />          
                 {/* <input className="hide" type="submit" value="Submit" onClick={this.handleSubmit}/> */}
