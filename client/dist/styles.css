@@ -1,9 +1,9 @@
 .results,
 .saved {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-row-gap: 5px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-row-gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 h1 {
@@ -29,6 +29,9 @@ h3 {
 
 img {
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 img:hover {
@@ -62,14 +65,15 @@ img:hover {
 
 a {
   display: "table-cell";
-  font-family: 'Raleway';
-  font-weight: bold;
+  font-family: 'Josefin Slab';
+  font-weight: 100;
   font-size: 1.5em;
   text-align: center;
   display: block;
   height: 25px;
   margin-top: 10px;
   color: black;
+  text-decoration: none;
 }
 
 a:hover{
@@ -79,7 +83,8 @@ a:hover{
 
 .artistPage {
   display: "table-cell";
-  font-family: 'Raleway';
+  font-family: 'Quicksand';
+  font-weight: 300;
   color: #424242;
   font-size: 1em;
   margin-top: 50px;
