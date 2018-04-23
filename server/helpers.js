@@ -1,7 +1,5 @@
 const axios = require('axios');
 const request = require('request');
-// const clientId = require('./../config').clientId;
-// const clientSecret = require('./../config').clientSecret;
 
 let clientId
 try {

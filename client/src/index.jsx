@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import LazyLoad from 'react-lazy-load';
 
 // Material UI
 import TextField from 'material-ui/TextField';

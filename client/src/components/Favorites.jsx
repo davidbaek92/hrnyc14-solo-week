@@ -1,5 +1,6 @@
 import React from 'react';
 import Artist from './Artist.jsx';
+import LazyLoad from 'react-lazy-load';
 
 const Favorites = (props) => {
   return(

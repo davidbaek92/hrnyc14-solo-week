@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Paper from 'material-ui/Paper';
 import Blazy from 'blazy';
+import LazyLoad from 'react-lazy-load';
 
 
 class Playlist extends React.Component {
@@ -41,12 +42,11 @@ class Playlist extends React.Component {
                   <a href={song.external_urls.spotify} target="_blank">{song.name} </a>                  
                 </div>          
               </div>                      
-                  <div className="textWithBlurredBg">
-                    <img 
-                    className="b-lazy"                    
+                  <div className="textWithBlurredBg">                    
+                    <img                                      
                     src={song.album.images[1].url} 
                     onClick={ () => {this.saveSong(song)}}
-                    />
+                    />                    
                     <h2>click to save</h2>                      
                   </div>
                   <p></p>
